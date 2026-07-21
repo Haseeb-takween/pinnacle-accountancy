@@ -91,11 +91,18 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button
                   onClick={() => setDialogOpen(true)}
-                  className="bg-primary hover:bg-[#0F4732] text-white px-6 py-3 text-base"
+                  size="lg"
+                  className="px-6"
                 >
                   Book a free 30-minute consultation
                 </Button>
-                <Link href="/services" className={cn(buttonVariants({ variant: "outline" }), "border-white/30 text-white hover:bg-white/10 px-6 py-3 text-base bg-transparent")}>
+                <Link
+                  href="/services"
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "lg" }),
+                    "border-white/30 bg-transparent px-6 text-white hover:bg-white/10 hover:text-white"
+                  )}
+                >
                   View our services
                 </Link>
               </div>
@@ -208,18 +215,12 @@ export default function Home() {
                 Book a free 30-minute consultation and find out how Pinnacle can help. No obligation, no sales pitch.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
-                <Button
-                  onClick={() => setDialogOpen(true)}
-                  className="h-11 bg-primary px-6 text-white hover:bg-[#0F4732]"
-                >
+                <Button onClick={() => setDialogOpen(true)} className="px-6">
                   Book a free consultation
                 </Button>
                 <Link
                   href="/contact"
-                  className={cn(
-                    buttonVariants({ variant: "outline" }),
-                    "h-11 border-border px-6 text-foreground hover:bg-[#ECEEEA]"
-                  )}
+                  className={cn(buttonVariants({ variant: "outline" }), "px-6")}
                 >
                   Get in touch
                 </Link>

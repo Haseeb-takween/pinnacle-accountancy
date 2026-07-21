@@ -159,8 +159,7 @@ export default function ServicesPage() {
                         </ul>
                         <Button
                           onClick={() => openDialog(s.enquiry)}
-                          className="mt-4 w-full bg-primary hover:bg-[#0F4732] text-white text-sm"
-                          size="sm"
+                          className="mt-4 w-full"
                         >
                           Enquire about this service
                         </Button>
@@ -180,7 +179,7 @@ export default function ServicesPage() {
             <p className="text-muted-foreground text-sm mb-5 max-w-md mx-auto">
               Book a free 30-minute consultation and we&apos;ll advise on exactly what you need and what it will cost.
             </p>
-            <Button onClick={() => openDialog()} className="bg-primary hover:bg-[#0F4732] text-white px-6">
+            <Button onClick={() => openDialog()} className="px-8">
               Book a free consultation
             </Button>
           </div>

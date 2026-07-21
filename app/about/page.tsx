@@ -94,7 +94,7 @@ export default function AboutPage() {
                   <p>✉️ <a href="mailto:hello@pinnacleaccountancy.co.uk" className="text-foreground hover:text-primary">hello@pinnacleaccountancy.co.uk</a></p>
                   <p>🕐 Mon–Fri 9am–5:30pm</p>
                 </div>
-                <Button onClick={() => setDialogOpen(true)} className="w-full bg-primary hover:bg-[#0F4732] text-white text-sm">
+                <Button onClick={() => setDialogOpen(true)} className="w-full">
                   Book a free consultation
                 </Button>
               </div>

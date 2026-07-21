@@ -91,7 +91,7 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
               type="button"
               variant="outline"
               onClick={() => setSubmittedEmail(null)}
-              className="h-11 border-border px-6 text-foreground hover:bg-[#ECEEEA] rounded-[0.3125rem]"
+              className="px-6"
             >
               Book another consultation
             </Button>
@@ -163,7 +163,7 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
               />
               {errors.message && <p className="text-destructive text-xs" role="alert">{errors.message.message}</p>}
             </div>
-            <Button type="submit" disabled={isSubmitting} className="w-full h-11 bg-primary hover:bg-[#0F4732] text-white rounded-[0.3125rem]">
+            <Button type="submit" disabled={isSubmitting} className="w-full">
               {isSubmitting ? "Sending…" : "Book free consultation"}
             </Button>
           </form>

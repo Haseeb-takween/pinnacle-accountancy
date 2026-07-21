@@ -103,7 +103,7 @@ export function Navbar() {
               {/* Gold CTA — opposite of Servio's primary-coloured button */}
               <Button
                 onClick={() => setDialogOpen(true)}
-                className="bg-[#B8935A] hover:bg-[#A07D45] text-[#14231C] font-semibold text-sm px-4"
+                className="bg-[#B8935A] px-4 font-semibold text-[#14231C] hover:bg-[#A07D45]"
               >
                 Book a free consultation
               </Button>
@@ -140,7 +140,7 @@ export function Navbar() {
                     </nav>
                     <Button
                       onClick={() => { setSheetOpen(false); setDialogOpen(true); }}
-                      className="bg-[#B8935A] hover:bg-[#A07D45] text-[#14231C] font-semibold w-full"
+                      className="w-full bg-[#B8935A] font-semibold text-[#14231C] hover:bg-[#A07D45]"
                     >
                       Book a free consultation
                     </Button>

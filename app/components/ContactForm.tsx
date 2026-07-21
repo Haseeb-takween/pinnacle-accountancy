@@ -89,7 +89,7 @@ export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
           type="button"
           variant="outline"
           onClick={() => setSubmittedEmail(null)}
-          className="h-11 border-border px-6 text-foreground hover:bg-[#ECEEEA] rounded-[0.3125rem]"
+          className="px-6"
         >
           Send another enquiry
         </Button>
@@ -193,7 +193,7 @@ export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
         <Button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto h-11 bg-primary hover:bg-[#0F4732] text-white px-8 rounded-[0.3125rem]"
+          className="w-full sm:w-auto px-8"
         >
           {isSubmitting ? "Sending…" : "Send enquiry"}
         </Button>
