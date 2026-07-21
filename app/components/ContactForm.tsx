@@ -41,7 +41,7 @@ const selectTriggerClass =
   "h-11 w-full min-w-0 rounded-[0.3125rem] border border-border bg-white px-3.5 text-sm shadow-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 data-placeholder:text-muted-foreground/70";
 
 export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
-  const [submitted, setSubmitted] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -64,14 +64,14 @@ export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
       body: JSON.stringify({ ...data, formType: "contact" }),
     });
     if (res.ok) {
-      setSubmitted(true);
+      setSubmittedEmail(data.email);
       reset();
     } else {
       toast.error("Something went wrong. Please try again or call us on 020 7123 4567.");
     }
   }
 
-  if (submitted) {
+  if (submittedEmail) {
     return (
       <div className="py-12 text-center" role="alert" aria-live="polite">
         <div className="w-14 h-14 rounded-full bg-[#E4EEE8] flex items-center justify-center mx-auto mb-4">
@@ -80,8 +80,9 @@ export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
           </svg>
         </div>
         <h3 style={{ fontFamily: "var(--font-display)" }} className="font-semibold text-xl mb-2">Enquiry received</h3>
-        <p className="text-muted-foreground">
-          Thank you for getting in touch. A confirmation email has been sent to your inbox.
+        <p className="text-muted-foreground max-w-md mx-auto">
+          Thank you for getting in touch. A confirmation email has been sent to{" "}
+          <span className="font-medium text-foreground">{submittedEmail}</span>.
           We aim to respond within one business day.
         </p>
       </div>

@@ -43,7 +43,7 @@ interface ConsultationDialogProps {
 }
 
 export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: ConsultationDialogProps) {
-  const [submitted, setSubmitted] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState<string | null>(null);
   const {
     register, handleSubmit, formState: { errors, isSubmitting }, setValue, reset,
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
@@ -55,7 +55,7 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
       body: JSON.stringify({ ...data, formType: "consultation" }),
     });
     if (res.ok) {
-      setSubmitted(true);
+      setSubmittedEmail(data.email);
       reset();
     } else {
       toast.error("Something went wrong. Please try again or call us on 020 7123 4567.");
@@ -63,7 +63,7 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
   }
 
   return (
-    <Dialog open={open} onOpenChange={(v) => { onOpenChange(v); if (!v) setSubmitted(false); }}>
+    <Dialog open={open} onOpenChange={(v) => { onOpenChange(v); if (!v) setSubmittedEmail(null); }}>
       <DialogContent className="sm:max-w-md bg-white text-foreground border border-border shadow-xl">
         <DialogHeader className="pr-8">
           <DialogTitle style={{ fontFamily: "var(--font-display)" }} className="text-xl text-foreground">
@@ -74,7 +74,7 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
           </DialogDescription>
         </DialogHeader>
 
-        {submitted ? (
+        {submittedEmail ? (
           <div className="py-8 text-center" role="alert" aria-live="polite">
             <div className="w-12 h-12 rounded-full bg-[#E4EEE8] flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,7 +83,8 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
             </div>
             <h3 style={{ fontFamily: "var(--font-display)" }} className="font-semibold text-lg mb-2">Consultation booked</h3>
             <p className="text-muted-foreground text-sm">
-              We&apos;ve received your free consultation request. A confirmation email has been sent to your inbox.
+              We&apos;ve received your free consultation request. A confirmation email has been sent to{" "}
+              <span className="font-medium text-foreground">{submittedEmail}</span>.
               We&apos;ll be in touch within one business day to arrange a time.
             </p>
           </div>
