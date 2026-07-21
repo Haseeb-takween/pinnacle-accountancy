@@ -61,7 +61,7 @@ export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
     const res = await fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, formType: "contact" }),
     });
     if (res.ok) {
       setSubmitted(true);
@@ -80,7 +80,10 @@ export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
           </svg>
         </div>
         <h3 style={{ fontFamily: "var(--font-display)" }} className="font-semibold text-xl mb-2">Enquiry received</h3>
-        <p className="text-muted-foreground">Thank you for getting in touch. We aim to respond within one business day.</p>
+        <p className="text-muted-foreground">
+          Thank you for getting in touch. A confirmation email has been sent to your inbox.
+          We aim to respond within one business day.
+        </p>
       </div>
     );
   }

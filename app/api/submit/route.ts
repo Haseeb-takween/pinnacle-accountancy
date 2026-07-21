@@ -1,10 +1,9 @@
 import { NextRequest } from "next/server";
-import { connectDB } from "@/lib/db";
-import Submission from "@/models/submission";
-import { sendConfirmationEmail } from "@/lib/email";
+import { sendConfirmationEmail, sendFormNotification } from "@/lib/email";
 import { z } from "zod";
 
 const schema = z.object({
+  formType: z.enum(["contact", "consultation"]).default("contact"),
   fullName: z.string().min(2),
   email: z.string().email(),
   phone: z.string().min(7),
@@ -22,12 +21,14 @@ export async function POST(req: NextRequest) {
       return Response.json({ error: "Invalid input" }, { status: 400 });
     }
 
-    await connectDB();
-    await Submission.create(parsed.data);
+    const data = parsed.data;
 
-    // Best-effort email — failure must not fail the submission
+    // Required: notify the firm with the submission details
+    await sendFormNotification(data);
+
+    // Best-effort confirmation to the visitor — failure must not fail the request
     try {
-      await sendConfirmationEmail(parsed.data.email, parsed.data.fullName);
+      await sendConfirmationEmail(data.email, data.fullName, data.formType);
     } catch {
       // silent
     }

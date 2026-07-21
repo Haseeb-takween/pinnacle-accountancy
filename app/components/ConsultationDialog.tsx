@@ -52,7 +52,7 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
     const res = await fetch("/api/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, formType: "consultation" }),
     });
     if (res.ok) {
       setSubmitted(true);
@@ -81,8 +81,11 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 style={{ fontFamily: "var(--font-display)" }} className="font-semibold text-lg mb-2">Thank you</h3>
-            <p className="text-muted-foreground text-sm">We&apos;ve received your enquiry and will be in touch within one business day.</p>
+            <h3 style={{ fontFamily: "var(--font-display)" }} className="font-semibold text-lg mb-2">Consultation booked</h3>
+            <p className="text-muted-foreground text-sm">
+              We&apos;ve received your free consultation request. A confirmation email has been sent to your inbox.
+              We&apos;ll be in touch within one business day to arrange a time.
+            </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
@@ -152,7 +155,7 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
               {errors.message && <p className="text-destructive text-xs" role="alert">{errors.message.message}</p>}
             </div>
             <Button type="submit" disabled={isSubmitting} className="w-full h-11 bg-primary hover:bg-[#0F4732] text-white rounded-[0.3125rem]">
-              {isSubmitting ? "Sending…" : "Send enquiry"}
+              {isSubmitting ? "Sending…" : "Book free consultation"}
             </Button>
           </form>
         )}
