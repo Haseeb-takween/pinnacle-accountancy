@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
+import { getSubmitErrorMessage } from "@/lib/submit-error";
 
 const schema = z.object({
   fullName: z.string().min(2, "Please enter your full name"),
@@ -67,7 +68,7 @@ export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
       setSubmittedEmail(data.email);
       reset();
     } else {
-      toast.error("Something went wrong. Please try again or call us on 020 7123 4567.");
+      toast.error(await getSubmitErrorMessage(res));
     }
   }
 

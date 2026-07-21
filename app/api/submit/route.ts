@@ -23,18 +23,27 @@ export async function POST(req: NextRequest) {
 
     const data = parsed.data;
 
-    // Required: notify the firm with the submission details
-    await sendFormNotification(data);
+    // Best-effort emails — never block the success response
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      try {
+        await sendFormNotification(data);
+      } catch (err) {
+        console.error("Failed to send notification email:", err);
+      }
 
-    // Best-effort confirmation to the visitor — failure must not fail the request
-    try {
-      await sendConfirmationEmail(data.email, data.fullName, data.formType);
-    } catch {
-      // silent
+      try {
+        await sendConfirmationEmail(data.email, data.fullName, data.formType);
+      } catch (err) {
+        console.error("Failed to send confirmation email:", err);
+      }
+    } else {
+      console.error("EMAIL_USER / EMAIL_PASS not set — skipping email send");
     }
 
+    // Always succeed after valid submission so the UI can show thank-you
     return Response.json({ success: true }, { status: 201 });
-  } catch {
+  } catch (err) {
+    console.error("Submit API error:", err);
     return Response.json({ error: "Server error" }, { status: 500 });
   }
 }
