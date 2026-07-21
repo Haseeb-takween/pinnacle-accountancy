@@ -82,11 +82,19 @@ export function ConsultationDialog({ open, onOpenChange, defaultEnquiry }: Consu
               </svg>
             </div>
             <h3 style={{ fontFamily: "var(--font-display)" }} className="font-semibold text-lg mb-2">Consultation booked</h3>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm mb-5">
               We&apos;ve received your free consultation request. A confirmation email has been sent to{" "}
               <span className="font-medium text-foreground">{submittedEmail}</span>.
               We&apos;ll be in touch within one business day to arrange a time.
             </p>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setSubmittedEmail(null)}
+              className="h-11 border-border px-6 text-foreground hover:bg-[#ECEEEA] rounded-[0.3125rem]"
+            >
+              Book another consultation
+            </Button>
           </div>
         ) : (
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>

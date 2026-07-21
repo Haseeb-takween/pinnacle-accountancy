@@ -80,11 +80,19 @@ export function ContactForm({ defaultEnquiry }: { defaultEnquiry?: string }) {
           </svg>
         </div>
         <h3 style={{ fontFamily: "var(--font-display)" }} className="font-semibold text-xl mb-2">Enquiry received</h3>
-        <p className="text-muted-foreground max-w-md mx-auto">
+        <p className="text-muted-foreground max-w-md mx-auto mb-6">
           Thank you for getting in touch. A confirmation email has been sent to{" "}
           <span className="font-medium text-foreground">{submittedEmail}</span>.
           We aim to respond within one business day.
         </p>
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => setSubmittedEmail(null)}
+          className="h-11 border-border px-6 text-foreground hover:bg-[#ECEEEA] rounded-[0.3125rem]"
+        >
+          Send another enquiry
+        </Button>
       </div>
     );
   }
