@@ -50,7 +50,7 @@ const stats = [
 const fadeInUp = {
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
+  viewport: { once: true, amount: 0.2 },
   transition: { duration: 0.5 },
 };
 
@@ -70,7 +70,12 @@ export default function Home() {
         <section id="main-content" className="relative overflow-hidden bg-foreground text-white py-20 md:py-28">
           <div className="absolute inset-0 opacity-5 ledger-lines pointer-events-none" />
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative">
-            <motion.div {...fadeInUp} className="max-w-2xl">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-2xl"
+            >
               <p className="text-accent text-sm font-medium uppercase tracking-widest mb-4">
                 ICAEW Member · AAT Qualified · Est. 2008
               </p>
@@ -184,24 +189,42 @@ export default function Home() {
 
         {/* Final CTA */}
         <section className="py-16">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div {...fadeInUp}>
-              <Shield className="w-10 h-10 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-semibold text-foreground mb-3" style={{ fontFamily: "var(--font-display)" }}>
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div
+              className="flex flex-col items-center text-center"
+              style={{ maxWidth: "36rem", marginLeft: "auto", marginRight: "auto" }}
+            >
+              <Shield className="mb-4 h-10 w-10 text-primary" aria-hidden="true" />
+              <h2
+                className="mb-3 text-3xl font-semibold text-foreground"
+                style={{ fontFamily: "var(--font-display)", textAlign: "center", width: "100%" }}
+              >
                 Ready to simplify your finances?
               </h2>
-              <p className="text-muted-foreground text-sm mb-6 max-w-md mx-auto">
+              <p
+                className="mb-6 text-sm text-muted-foreground"
+                style={{ textAlign: "center", width: "100%", maxWidth: "28rem" }}
+              >
                 Book a free 30-minute consultation and find out how Pinnacle can help. No obligation, no sales pitch.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <Button onClick={() => setDialogOpen(true)} className="bg-primary hover:bg-[#0F4732] text-white px-6 py-3">
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Button
+                  onClick={() => setDialogOpen(true)}
+                  className="h-11 bg-primary px-6 text-white hover:bg-[#0F4732]"
+                >
                   Book a free consultation
                 </Button>
-                <Link href="/contact" className={cn(buttonVariants({ variant: "outline" }), "border-border text-foreground hover:bg-[#ECEEEA] px-6 py-3")}>
+                <Link
+                  href="/contact"
+                  className={cn(
+                    buttonVariants({ variant: "outline" }),
+                    "h-11 border-border px-6 text-foreground hover:bg-[#ECEEEA]"
+                  )}
+                >
                   Get in touch
                 </Link>
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
       </main>

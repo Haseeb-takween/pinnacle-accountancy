@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pinnacle Accountancy
 
-## Getting Started
+Hand-coded professional services website for **Pinnacle Accountancy** — a fictional UK accountancy firm (Takween Centre UK Ltd — Developer Demo Programme, Brief 11).
 
-First, run the development server:
+**Tagline:** Clear Numbers. Confident Decisions.
+
+## Pages
+
+| Route | Page |
+|-------|------|
+| `/` | Home — services overview, who we serve, why Pinnacle, testimonials, free consultation CTA |
+| `/services` | Services — full descriptions + fixed-fee note |
+| `/about` | About — firm story, accreditations, team |
+| `/resources` | Resources — tax deadlines, sole trader expenses, sole trader vs limited company |
+| `/contact` | Contact — enquiry form + business details |
+
+## Tech stack
+
+- **Next.js** (App Router) + React + TypeScript
+- **Tailwind CSS** + shadcn/ui
+- **Framer Motion** for subtle motion
+- **Nodemailer** for contact & consultation form emails (no database)
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env.local
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Development server |
+| `pnpm build` | Production build |
+| `pnpm start` | Run production build |
+| `pnpm lint` | ESLint |
 
-## Learn More
+## Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local` and fill in:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `EMAIL_USER` | Yes | Gmail / Google Workspace address used to send mail via SMTP |
+| `EMAIL_PASS` | Yes | [Gmail App Password](https://myaccount.google.com/apppasswords) (not your normal password) |
+| `EMAIL_TO` | No | Where submissions are delivered (defaults to `EMAIL_USER`) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Example:
 
-## Deploy on Vercel
+```env
+EMAIL_USER=your-gmail@gmail.com
+EMAIL_PASS=your-gmail-app-password
+EMAIL_TO=hello@pinnacleaccountancy.co.uk
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Forms (email only)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+There is **no database**. Submissions are handled by the backend API and sent by email.
+
+| Form | Endpoint | Behaviour |
+|------|----------|-----------|
+| Contact form (`/contact`) | `POST /api/submit` | Emails the firm + confirmation to the visitor |
+| Free 30-minute consultation (dialog) | `POST /api/submit` | Same, labelled as a consultation booking |
+
+After a successful submit, the UI shows a confirmation message that an email has been sent.
+
+Body shape:
+
+```json
+{
+  "formType": "contact" | "consultation",
+  "fullName": "string",
+  "email": "string",
+  "phone": "string",
+  "enquiryType": "string",
+  "message": "string",
+  "hearAboutUs": "string (optional, contact form only)"
+}
+```
+
+## Business details (fictional)
+
+- **Address:** 22 Cannon Street, London, EC4M 5XD  
+- **Phone:** 020 7123 4567  
+- **Email:** hello@pinnacleaccountancy.co.uk  
+- **Hours:** Monday–Friday 9am–5:30pm  
+- **Accreditations:** ICAEW Member, AAT Qualified  
+- **Founded:** 2008  
+
+## Deploy
+
+Deploy to [Vercel](https://vercel.com) (or any Next.js host). Set the same `EMAIL_USER`, `EMAIL_PASS`, and `EMAIL_TO` environment variables in the hosting dashboard.
+
+Document the live URL in your demo submission once deployed.
