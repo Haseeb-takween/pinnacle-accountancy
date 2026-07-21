@@ -111,13 +111,6 @@ export function Navbar() {
 
             {/* Mobile */}
             <div className="flex md:hidden items-center gap-2">
-              <Button
-                size="sm"
-                onClick={() => setDialogOpen(true)}
-                className="hidden sm:flex bg-[#B8935A] hover:bg-[#A07D45] text-[#14231C] font-semibold text-xs px-3"
-              >
-                Book a consultation
-              </Button>
               <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
                 <SheetTrigger
                   render={
