@@ -16,7 +16,7 @@ const testimonials = [
     initials: "SP",
   },
   {
-    quote: "I have two rental properties and I was nervous about making tax digital. Priya handled the whole transition, got me set up properly, and now my quarterly VAT and self-assessment are just handled. The fixed monthly fee means I always know what I'm paying — no unexpected invoices on top of everything else.",
+    quote: "I have two rental properties and I was drowning in spreadsheets. Priya moved me onto Xero, set up proper bookkeeping for both properties, and now my monthly accounts just arrive without me chasing anything. The fixed monthly fee means I always know what I'm paying — no unexpected invoices on top of everything else.",
     author: "Nadia Cousins",
     role: "Landlord, two properties in South London",
     initials: "NC",
