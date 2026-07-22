@@ -19,7 +19,7 @@ Hand-coded professional services website for **Pinnacle Accountancy** — a fict
 - **Next.js** (App Router) + React + TypeScript
 - **Tailwind CSS** + shadcn/ui
 - **Framer Motion** for subtle motion
-- **Nodemailer** for contact & consultation form emails (no database)
+- **Resend** for contact & consultation form emails (no database)
 
 ## Getting started
 
@@ -46,21 +46,23 @@ Copy `.env.example` to `.env.local` and fill in:
 
 | Variable | Required | Description |
 |----------|----------|-------------|
-| `EMAIL_USER` | Yes | Gmail / Google Workspace address used to send mail via SMTP |
-| `EMAIL_PASS` | Yes | [Gmail App Password](https://myaccount.google.com/apppasswords) (not your normal password) |
-| `EMAIL_TO` | No | Where submissions are delivered (defaults to `EMAIL_USER`) |
+| `RESEND_API_KEY` | Yes | API key from [Resend](https://resend.com/api-keys) |
+| `EMAIL_TO` | Yes | Your Resend account signup email (required for sandbox) |
+| `EMAIL_FROM` | No | Default: `onboarding@resend.dev` (exact value for sandbox) |
 
-Example:
+Example (sandbox testing):
 
 ```env
-EMAIL_USER=your-gmail@gmail.com
-EMAIL_PASS=your-gmail-app-password
-EMAIL_TO=hello@pinnacleaccountancy.co.uk
+RESEND_API_KEY=re_xxxxxxxx
+EMAIL_FROM=onboarding@resend.dev
+EMAIL_TO=your_registered_email@example.com
 ```
+
+**Sandbox rules:** `from` must be exactly `onboarding@resend.dev`, and `to` must be your Resend signup email. Visitor confirmation emails to other addresses only work after you verify a custom domain.
 
 ## Forms (email only)
 
-There is **no database**. Submissions are handled by the backend API and sent by email.
+There is **no database**. Submissions are handled by the backend API and sent via Resend.
 
 | Form | Endpoint | Behaviour |
 |------|----------|-----------|
@@ -94,6 +96,6 @@ Body shape:
 
 ## Deploy
 
-Deploy to [Vercel](https://vercel.com) (or any Next.js host). Set the same `EMAIL_USER`, `EMAIL_PASS`, and `EMAIL_TO` environment variables in the hosting dashboard.
+Deploy to [Vercel](https://vercel.com) (or any Next.js host). Set `RESEND_API_KEY`, `EMAIL_TO`, and optionally `EMAIL_FROM` in the hosting dashboard.
 
 Document the live URL in your demo submission once deployed.

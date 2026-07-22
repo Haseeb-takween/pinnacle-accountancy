@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
     const data = parsed.data;
 
     // Best-effort emails — never block the success response
-    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+    if (process.env.RESEND_API_KEY && process.env.EMAIL_TO) {
       try {
         await sendFormNotification(data);
       } catch (err) {
@@ -37,7 +37,9 @@ export async function POST(req: NextRequest) {
         console.error("Failed to send confirmation email:", err);
       }
     } else {
-      console.error("EMAIL_USER / EMAIL_PASS not set — skipping email send");
+      console.error(
+        "RESEND_API_KEY or EMAIL_TO not set — skipping email send"
+      );
     }
 
     // Always succeed after valid submission so the UI can show thank-you
